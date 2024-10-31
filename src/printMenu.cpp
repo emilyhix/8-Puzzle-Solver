@@ -59,21 +59,8 @@ void printMenu() {
     cout << "3) A* with the Euclidean distance heuristic." << endl << endl;
     cin >> algorithmChoice;
 
-    if (algorithmChoice == 1) {
-        //uniformCost
-        Node parent(1, initialTile);
-        UniformCost(parent);
-    }
-    else if (algorithmChoice == 2) {
-        //A* Misplaced Tile
-        Node parent(2, initialTile);
-        AStarMisplacedTile(parent);
-    }
-    else if (algorithmChoice == 3) {
-        //A* Euclidean Distance
-        Node parent(3, initialTile);
-        AStarEuclidean(parent);
-    }
+    Node parent(algorithmChoice, initialTile);
+    Search(algorithmChoice, parent);
     
     return;
 }
