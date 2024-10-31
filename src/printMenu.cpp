@@ -53,14 +53,20 @@ void printMenu() {
         // }
     }
 
-    cout << "Enter your choice of algorithm" << endl;
-    cout << "1) Uniform Cost Search" << endl;
-    cout << "2) A* with the Misplaced Tile heuristic." << endl;
-    cout << "3) A* with the Euclidean distance heuristic." << endl << endl;
-    cin >> algorithmChoice;
+    while(algorithmChoice == 0){
+        if(algorithmChoice == 1 || algorithmChoice == 2 || algorithmChoice == 3){
+            Node parent(algorithmChoice, initialTile);
+            Search(algorithmChoice, parent);
+        }
+        else{
+            cout << "Enter your choice of algorithm" << endl;
+            cout << "1) Uniform Cost Search" << endl;
+            cout << "2) A* with the Misplaced Tile heuristic." << endl;
+            cout << "3) A* with the Euclidean distance heuristic." << endl << endl;
+            cin >> algorithmChoice;
+        }
+    }
 
-    Node parent(algorithmChoice, initialTile);
-    Search(algorithmChoice, parent);
     
     return;
 }
