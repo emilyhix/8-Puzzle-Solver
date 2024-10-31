@@ -9,11 +9,11 @@ Node::Node(int algorithm, int initialArray[9]) {
                     hN = 0;
         }
         if (algorithm == 2) {
-                    //A* Euclidean
+                    //A* Misplaced Tile
                     //hN = something
         }
         if (algorithm == 3) {
-                    //A* Missing Tile
+                    //A* Euclidean
                     //hN = something
         }
     

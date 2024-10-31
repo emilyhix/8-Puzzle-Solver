@@ -1,1 +1,7 @@
-#include "../header/AStarED.h"
+#include "..\header\node.h"
+
+void AStarEuclidean(Node initialNode) {
+
+
+    return;
+}
