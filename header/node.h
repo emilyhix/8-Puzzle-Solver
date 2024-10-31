@@ -1,6 +1,5 @@
 #ifndef NODE_H
 #define NODE_H
-#include "../header/problem.h"
 
 enum Operations {UP, DOWN, LEFT, RIGHT};
 

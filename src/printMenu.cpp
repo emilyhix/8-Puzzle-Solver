@@ -1,4 +1,5 @@
-#include "../header/printMenu.h"
+#include <iostream>
+using namespace std;
 
 void printMenu() {
     int puzzleChoice = 0;
