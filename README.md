@@ -1,2 +1,2 @@
-# CS170-Project-1
-repo for cs170 proj 1
+# CS170 Project 1
+8 Puzzle Solver by Sabaipon Phimmala and Emily Hix
