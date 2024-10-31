@@ -2,6 +2,7 @@
 
 void printMenu() {
     int puzzleChoice = 0;
+    int algorithmChoice = 0;
 
     cout << "Welcome to ehix001-sphim001 8 puzzle solver." << endl;
     cout << "Type \"1\" to use a default puzzle, or \"2\" to enter your own puzzle." << endl;
@@ -14,6 +15,7 @@ void printMenu() {
     cout << "Enter your choice of algorithm" << endl;
     cout << "Uniform Cost Search" << endl;
     cout << "A* with the Misplaced Tile heuristic." << endl;
-    cout << "A* with the Euclidean distance heuristic." << endl;
+    cout << "A* with the Euclidean distance heuristic." << endl << endl;
+    cin >> algorithmChoice;
     return;
 }
