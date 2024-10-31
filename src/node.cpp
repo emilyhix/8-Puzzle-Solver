@@ -50,8 +50,8 @@ Node::Node(int algorithm, Operations inputOp, Node parent) {
 
         // keep initial state
         for (int i = 0; i < 9; ++i) {
-            initial_state[i] = parent.getInitial(i);
-            current_state[i] = parent.getInitial(i);
+            initial_state[i] = parent.initial_state[i];
+            current_state[i] = parent.current_state[i];
         }
 }
 
@@ -109,16 +109,20 @@ void Node::updateState() {
     }
 }
 
-bool Node::operator>(const Node & N) {
-    bool result;
+bool Node::operator<(const Node & N) const {
+    return ((gN + hN) > (N.gN + N.hN));
+}
 
-    if ((this->gN + this->hN) < (N.gN + N.hN)) {
-        result = true;
+Node& Node::operator=(const Node & N) {
+    for (int i = 0; i < 9; ++i) {
+        initial_state[i] = N.initial_state[i];
+        current_state[i] = N.current_state[i];
+        goal_state[i] = N.goal_state[i];
     }
-    else {
-        result = false;
-    }
-    return result;
+    hN = N.hN;
+    gN = N.gN;
+    operation = N.operation;
+    return *this;
 }
 
 void Node::printNode() {
