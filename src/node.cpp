@@ -20,6 +20,7 @@ Node::Node(int algorithm, int initialArray[9]) {
     // set initial
     for (int i = 0; i < 9; ++i) {
         initial_state[i] = initialArray[i];
+        current_state[i] = initialArray[i];
     }
 
     operation = UP;
@@ -32,24 +33,25 @@ Node::Node(int algorithm, Operations inputOp, Node parent) {
 
         // set operation
         operation = inputOp;
-
+        
         // determine h(N)
         if (algorithm == 1) {
                     //UniformCostSearch
                     hN = 0;
         }
         if (algorithm == 2) {
-                    //A* Euclidean
+                    //A* Misplaced Tile
                     //hN = something
         }
         if (algorithm == 3) {
-                    //A* Missing Tile
+                    //A* Euclidean
                     //hN = something
         }
 
         // keep initial state
         for (int i = 0; i < 9; ++i) {
             initial_state[i] = parent.getInitial(i);
+            current_state[i] = parent.getInitial(i);
         }
 }
 
@@ -71,7 +73,65 @@ bool Node::Valid() {
         if (current_state[2] == 0 || current_state[5] == 0 || current_state[8] == 0)
             return false;
     }
-    else return true;
+    return true;
+}
+
+void Node::updateState() {
+    int zeroIndex = 0;
+
+    //find location of zero
+    for (int i = 0; i < 9; i++) {
+        if (current_state[i] == 0) {
+            zeroIndex = i;
+        }
+    }
+
+    // move tiles
+    if (operation == UP) {
+        int temp = current_state[zeroIndex - 3];
+        current_state[zeroIndex - 3] = 0;
+        current_state[zeroIndex] = temp;
+    }
+    else if (operation == DOWN) {
+        int temp = current_state[zeroIndex + 3];
+        current_state[zeroIndex + 3] = 0;
+        current_state[zeroIndex] = temp;
+    }
+    else if (operation == LEFT) {
+        int temp = current_state[zeroIndex - 1];
+        current_state[zeroIndex - 1] = 0;
+        current_state[zeroIndex] = temp;
+    }
+    else if (operation == RIGHT) {
+        int temp = current_state[zeroIndex + 1];
+        current_state[zeroIndex + 1] = 0;
+        current_state[zeroIndex] = temp;
+    }
+}
+
+void Node::printNode() {
+    int count3 = 0;
+    cout << endl;
+    for (int i = 0; i < 9; i++) {
+        if (count3 > 2) {
+            cout << endl;
+            count3 = 0;
+        }
+        cout << current_state[i] << " ";
+        ++count3;
+    }
+    cout << endl;
+}
+
+bool Node::checkFinal() {
+    bool temp = true;
+    
+    for (int i = 0; i < 9; ++i) {
+        if (current_state[i] != goal_state[i]) {
+            temp = false;
+        }
+    }
+    return temp;
 }
 
 int Node::getInitial (int index) {
