@@ -1,9 +1,10 @@
 #ifndef NODE_H
 #define NODE_H
 
-enum Operations {UP, DOWN, LEFT, RIGHT};
 #include <iostream>
 using namespace std;
+
+enum Operations {UP, DOWN, LEFT, RIGHT};
 
 class Node{
     private:
