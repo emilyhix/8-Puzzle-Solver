@@ -5,7 +5,5 @@ ADD_EXECUTABLE(run
     src/main.cpp
     src/node.cpp
     src/printMenu.cpp
-    src/AStarED.cpp
-    src/AStarMT.cpp
-    src/UniformCost.cpp
+    src/Search.cpp
 )
