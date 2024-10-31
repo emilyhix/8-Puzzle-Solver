@@ -109,6 +109,18 @@ void Node::updateState() {
     }
 }
 
+bool Node::operator>(const Node & N) {
+    bool result;
+
+    if ((this->gN + this->hN) < (N.gN + N.hN)) {
+        result = true;
+    }
+    else {
+        result = false;
+    }
+    return result;
+}
+
 void Node::printNode() {
     int count3 = 0;
     cout << endl;

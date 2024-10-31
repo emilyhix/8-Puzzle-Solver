@@ -22,6 +22,7 @@ class Node{
     public:
         Node(int, int setInitial[9]); //create parent
         Node(int, Operations, Node); //create children
+        bool operator>(const Node &);
         void updateState();
         bool Valid();
         int getInitial(int);
