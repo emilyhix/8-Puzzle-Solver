@@ -1,16 +1,17 @@
 #include "../header/node.h"
 
-Node::Node(int algorithm, int initialArray[9]) {
-    gN = 0;
+Node::Node(int algorithm, int initialArray[9]) { // initial node constructor
+    this->gN = 0;
     
     // determine h(N)
     if (algorithm == 1) { //UniformCostSearch
-        hN = 0;
+        this->hN = 0;
     }
     if (algorithm == 2) { //A* Misplaced Tile
+        this->hN = 0;
         for(int i = 0; i < 9; i++){
             if(initialArray[i] == (i + 1)){
-                hN += 1;
+                this->hN += 1;
             }
         }
     }
@@ -18,7 +19,7 @@ Node::Node(int algorithm, int initialArray[9]) {
         //hN = something
     }
 
-    fN = gN + hN;
+    this->fN = this->gN + this->hN;
     
     // set initial
     for (int i = 0; i < 9; ++i) {
@@ -29,22 +30,22 @@ Node::Node(int algorithm, int initialArray[9]) {
     operation = UP;
 }
 
-Node::Node(int algorithm, Operations inputOp, Node parent) {
+Node::Node(int algorithm, Operations inputOp, Node parent) { // children node constructor
         
     //set gN
-    gN = parent.getgN() + 1;
+    this->gN = parent.getgN() + 1;
 
     // set operation
     operation = inputOp;
     
     // determine h(N)
     if (algorithm == 1) { //UniformCostSearch
-        hN = 0;
+        this->hN = 0;
     }
     if (algorithm == 2) { //A* Misplaced Tile
         for(int i = 0; i < 9; i++){
             if(current_state[i] == (i + 1)){
-                hN += 1;
+                this->hN += 1;
             }
         }
     }
