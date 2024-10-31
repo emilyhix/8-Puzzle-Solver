@@ -4,18 +4,21 @@ Node::Node(int algorithm, int initialArray[9]) {
     gN = 0;
     
     // determine h(N)
-        if (algorithm == 1) {
-                    //UniformCostSearch
-                    hN = 0;
+    if (algorithm == 1) { //UniformCostSearch
+        hN = 0;
+    }
+    if (algorithm == 2) { //A* Misplaced Tile
+        for(int i = 0; i < 9; i++){
+            if(initialArray[i] == (i + 1)){
+                hN += 1;
+            }
         }
-        if (algorithm == 2) {
-                    //A* Misplaced Tile
-                    //hN = something
-        }
-        if (algorithm == 3) {
-                    //A* Euclidean
-                    //hN = something
-        }
+    }
+    if (algorithm == 3) { //A* Euclidean
+        //hN = something
+    }
+
+    fN = gN + hN;
     
     // set initial
     for (int i = 0; i < 9; ++i) {
@@ -28,31 +31,32 @@ Node::Node(int algorithm, int initialArray[9]) {
 
 Node::Node(int algorithm, Operations inputOp, Node parent) {
         
-        //set gN
-        gN = parent.getgN() + 1;
+    //set gN
+    gN = parent.getgN() + 1;
 
-        // set operation
-        operation = inputOp;
-        
-        // determine h(N)
-        if (algorithm == 1) {
-                    //UniformCostSearch
-                    hN = 0;
+    // set operation
+    operation = inputOp;
+    
+    // determine h(N)
+    if (algorithm == 1) { //UniformCostSearch
+        hN = 0;
+    }
+    if (algorithm == 2) { //A* Misplaced Tile
+        for(int i = 0; i < 9; i++){
+            if(current_state[i] == (i + 1)){
+                hN += 1;
+            }
         }
-        if (algorithm == 2) {
-                    //A* Misplaced Tile
-                    //hN = something
-        }
-        if (algorithm == 3) {
-                    //A* Euclidean
-                    //hN = something
-        }
+    }
+    if (algorithm == 3) { //A* Euclidean
+        //hN = something
+    }
 
-        // keep initial state
-        for (int i = 0; i < 9; ++i) {
-            initial_state[i] = parent.initial_state[i];
-            current_state[i] = parent.current_state[i];
-        }
+    // keep initial state
+    for (int i = 0; i < 9; ++i) {
+        initial_state[i] = parent.initial_state[i];
+        current_state[i] = parent.current_state[i];
+    }
 }
 
 bool Node::Valid() {

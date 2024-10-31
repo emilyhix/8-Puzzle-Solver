@@ -17,6 +17,7 @@ class Node{
         int current_state[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
         int hN;
         int gN;
+        int fN;
         Operations operation;
 
     public:
