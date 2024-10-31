@@ -80,16 +80,20 @@ Node::Node(int algorithm, Operations inputOp, Node parent) {
 bool Node::Valid() {
 
     if (operation == UP) {
-        if (current_state[])
+        if (current_state[0] == 0 || current_state[1] == 0 || current_state[2] == 0)
+            return false;
     }
     else if (operation == DOWN) {
-
+        if (current_state[6] == 0 || current_state[7] == 0 || current_state[8] == 0)
+            return false;
     }
     else if (operation == LEFT) {
-
+        if (current_state[0] == 0 || current_state[3] == 0 || current_state[6] == 0)
+            return false;
     }
     else if (operation == RIGHT) {
-
+        if (current_state[2] == 0 || current_state[5] == 0 || current_state[8] == 0)
+            return false;
     }
     else return true;
 }
