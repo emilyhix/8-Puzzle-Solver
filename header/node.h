@@ -7,11 +7,13 @@ using namespace std;
 
 class Node{
     private:
-        int initial_state[9];
+        int initial_state[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+        
         int goal_state[9] = {1, 2, 3,
                              4, 5, 6,
                              7, 8, 0};
-        int current_state[9];
+
+        int current_state[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
         int hN;
         int gN;
         Operations operation;
