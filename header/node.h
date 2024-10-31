@@ -78,9 +78,20 @@ Node::Node(int algorithm, Operations inputOp, Node parent) {
 }
 
 bool Node::Valid() {
-    int index;
 
-    if 
+    if (operation == UP) {
+        if (current_state[])
+    }
+    else if (operation == DOWN) {
+
+    }
+    else if (operation == LEFT) {
+
+    }
+    else if (operation == RIGHT) {
+
+    }
+    else return true;
 }
 
 int Node::getInitial (int index) {
