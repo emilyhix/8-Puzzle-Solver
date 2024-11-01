@@ -2,7 +2,8 @@
 #define SEARCH_H
 #include "..\header\node.h"
 #include <queue>
+#include <vector>
 
-void Search(int, Node);
-
+Node Search(int, Node);
+void expand(int, Node, priority_queue<Node> &, vector<Node>);
 #endif

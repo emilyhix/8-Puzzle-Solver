@@ -118,6 +118,23 @@ bool Node::operator<(const Node & N) const {
     return ((gN + hN) > (N.gN + N.hN));
 }
 
+bool Node::operator== (const Node &N) {
+    bool result = true;
+
+    for (int i = 0; i < 9; i++) {
+        if (current_state[i] != N.current_state[i]) {
+            result = false;
+        }
+    }
+    if (gN != N.gN) {
+        result = false;
+    }
+    if (hN != N.hN) {
+        result = false;
+    }
+    return result;
+}
+
 Node& Node::operator=(const Node & N) {
     for (int i = 0; i < 9; ++i) {
         initial_state[i] = N.initial_state[i];
