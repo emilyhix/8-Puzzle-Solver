@@ -8,72 +8,73 @@ Node Search(int algorithm, Node initialNode) {
     frontier.push(initialNode);
 
     while (!frontier.empty()) {
-        
         Node temp = frontier.top();
-        temp.printNode();
         if (temp.checkFinal()) {
             return temp;
         }
         else {
             frontier.pop();
             explored.push_back(temp);
-            expand(1, temp, frontier, explored);
+            expand(algorithm, temp, frontier, explored);
         }
     }
     return initialNode; //ERROR - SHOULD NOT REACH  
 }
-
-// temporary function so that Baipon doesn't get confused
-// void AStarMisplacedTilesSearch(Node initialNode){
-//     priority_queue<Node> frontier;
-//     priority_queue<Node> explored;
-
-//     if(frontier.empty()){
-//         return;
-//     }
-
-//     return;
-// }
 
 void expand(int algorithm, Node parent, priority_queue<Node> &frontier, vector<Node> explored) {
     Node up(algorithm, UP, parent);
     Node down(algorithm, DOWN, parent);
     Node left(algorithm, LEFT, parent);
     Node right(algorithm, RIGHT, parent);
-    up.updateState();
-    down.updateState();
-    left.updateState();
-    right.updateState();
 
     bool upPresent = false;
     bool downPresent = false;
     bool leftPresent = false;
     bool rightPresent = false;
 
-    for (int i = 0; i < explored.size(); i++) {
-        if (up == explored[i]) {
-            upPresent = true;
+    if (up.Valid()) {
+        for (int i = 0; i < explored.size(); i++) {
+            if (up == explored[i]) {
+                upPresent = true;
+            }
         }
-        if (down == explored[i]) {
-            downPresent = true;
-        }
-        if (left == explored[i]) {
-            leftPresent = true;
-        }
-        if (right == explored[i]) {
-            rightPresent = true;
+        if (!upPresent) {
+            up.updateState();
+            frontier.push(up);
         }
     }
-    if ((up.Valid()) && !upPresent) {
-        frontier.push(up);
+    if (down.Valid()) {
+        for (int i = 0; i < explored.size(); i++) {
+            if (down == explored[i]) {
+                downPresent = true;
+            }
+        }
+        if (!downPresent) {
+            down.updateState();
+            frontier.push(down);
+        }
     }
-    if ((down.Valid()) && !downPresent) {
-        frontier.push(down);
+    if (left.Valid()) {
+        for (int i = 0; i < explored.size(); i++) {
+            if (left == explored[i]) {
+                leftPresent = true;
+            }
+        }
+        if (!leftPresent) {
+            left.updateState();
+            frontier.push(left);
+        }
     }
-    if ((left.Valid()) && !leftPresent) {
-        frontier.push(left);
+    if (right.Valid()) {
+        for (int i = 0; i < explored.size(); i++) {
+            if (right == explored[i]) {
+                rightPresent = true;
+            }
+        }
+        if (!rightPresent) {
+            right.updateState();
+            frontier.push(right);
+        }
     }
-    if ((right.Valid()) && !rightPresent) {
-        frontier.push(right);
-    }
+    return;
 }

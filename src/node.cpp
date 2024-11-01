@@ -1,5 +1,4 @@
 #include "../header/node.h"
-#include "node.h"
 
 Node::Node(int algorithm, int initialArray[9]) { // initial node constructor
     gN = 0;
@@ -36,7 +35,7 @@ Node::Node(int algorithm, Operations inputOp, Node parent) { // children node co
     
     // determine h(N)
     if (algorithm == 1) { //UniformCostSearch
-        updateState();
+        //updateState();
         hN = 0;
     }
     if (algorithm == 2) { //A* Misplaced Tile
@@ -56,7 +55,7 @@ Node::Node(int algorithm, Operations inputOp, Node parent) { // children node co
 }
 
 bool Node::Valid() {
-
+    
     if (operation == UP) {
         if (current_state[0] == 0 || current_state[1] == 0 || current_state[2] == 0)
             return false;
