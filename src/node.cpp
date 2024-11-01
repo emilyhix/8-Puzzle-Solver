@@ -1,19 +1,15 @@
 #include "../header/node.h"
+#include "node.h"
 
 Node::Node(int algorithm, int initialArray[9]) { // initial node constructor
-    this->gN = 0;
+    gN = 0;
     
     // determine h(N)
     if (algorithm == 1) { //UniformCostSearch
         this->hN = 0;
     }
     if (algorithm == 2) { //A* Misplaced Tile
-        this->hN = 0;
-        for(int i = 0; i < 9; i++){
-            if(initialArray[i] == (i + 1)){
-                this->hN += 1;
-            }
-        }
+        AStarMTHeuristic(initialArray);
     }
     if (algorithm == 3) { //A* Euclidean
         //hN = something
@@ -40,17 +36,16 @@ Node::Node(int algorithm, Operations inputOp, Node parent) { // children node co
     
     // determine h(N)
     if (algorithm == 1) { //UniformCostSearch
-        this->hN = 0;
+        updateState();
+        hN = 0;
     }
     if (algorithm == 2) { //A* Misplaced Tile
-        for(int i = 0; i < 9; i++){
-            if(current_state[i] == (i + 1)){
-                this->hN += 1;
-            }
-        }
+        updateState();
+        hN = AStarMTHeuristic(current_state);
     }
     if (algorithm == 3) { //A* Euclidean
-        //hN = something
+        updateState();
+        hN = AStarEDHeuristic(current_state);
     }
 
     // keep initial state
@@ -165,4 +160,55 @@ int Node::getgN() {
 
 int Node::gethN() {
     return hN;
+}
+
+int Node::getGoalMatrix(int i, int j){
+    return goal_matrix[i][j];
+}
+
+int Node::AStarMTHeuristic(int board[9]){
+    int hN = 0;
+
+    for(int i = 0; i < 9; i++){
+            if(current_state[i] == (i + 1)){
+                hN += 1;
+            }
+        }
+
+    return hN;
+}
+
+int Node::AStarEDHeuristic(int array[9]){
+    int matrix[3][3] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int count = 0;
+
+    for(int i = 0; i < 3; i++){ // populate matrix
+        for(int j = 0; j < 3; j++){
+            matrix[i][j] = array[count];
+            count++;
+        }
+    }
+
+    int distX = 0;
+    int distY = 0;
+    int distance = 0;
+
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            if(matrix[i][j] != getGoalMatrix(i,j)){ // if curr matrix != goal matrix
+                for(int m = 0; m < 3; m++){ // find goal matrix location
+                    for(int n = 0; n < 3; n++){
+                        if(getGoalMatrix(m,n) == matrix[i][j]){ // found goal matrix location
+                            distX = m - i; // calculate 
+                            distY = n - j;
+
+                            distance += sqrt((distX * distX)+(distY * distY)); // find the heuristic
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return distance;
 }
