@@ -35,7 +35,6 @@ Node::Node(int algorithm, Operations inputOp, Node parent) { // children node co
     
     // determine h(N)
     if (algorithm == 1) { //UniformCostSearch
-        //updateState();
         hN = 0;
     }
     if (algorithm == 2) { //A* Misplaced Tile
@@ -73,7 +72,7 @@ bool Node::Valid() {
     return true;
 }
 
-void Node::updateState() {
+void Node::updateState(int algorithm) {
     int zeroIndex = 0;
 
     //find location of zero
@@ -104,10 +103,26 @@ void Node::updateState() {
         current_state[zeroIndex + 1] = 0;
         current_state[zeroIndex] = temp;
     }
+
+    if (algorithm == 1) { //UniformCostSearch
+        //updateState();
+        hN = 0;
+    }
+    if (algorithm == 2) { //A* Misplaced Tile
+        hN = AStarMTHeuristic(current_state);
+    }
+    if (algorithm == 3) { //A* Euclidean
+        hN = AStarEDHeuristic(current_state);
+    }
+
 }
 
 bool Node::operator<(const Node & N) const {
     return ((gN + hN) > (N.gN + N.hN));
+}
+
+bool Node::operator>(const Node & N) const {
+    return ((gN + hN) < (N.gN + N.hN));
 }
 
 bool Node::operator== (const Node &N) {
@@ -172,7 +187,7 @@ int Node::getgN() {
     return gN;
 }
 
-int Node::gethN() {
+double Node::gethN() {
     return hN;
 }
 
@@ -199,11 +214,10 @@ int Node::AStarMTHeuristic(int board[9]){
             }
         }
     }
-
     return hN;
 }
 
-int Node::AStarEDHeuristic(int array[9]){
+double Node::AStarEDHeuristic(int array[9]){
     int matrix[3][3] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     int count = 0;
 
@@ -216,7 +230,7 @@ int Node::AStarEDHeuristic(int array[9]){
 
     int distX = 0;
     int distY = 0;
-    int distance = 0;
+    double distance = 0;
 
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){

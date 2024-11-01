@@ -5,17 +5,38 @@ Node Search(int algorithm, Node initialNode) {
     priority_queue<Node> frontier;
     vector<Node> explored;
 
+    int totalNodesExpanded = 0;
+    int longestFrontier = 0;
+
     frontier.push(initialNode);
+    longestFrontier = frontier.size();
 
     while (!frontier.empty()) {
         Node temp = frontier.top();
+        totalNodesExpanded++;
+        //cout << "top of frontier:" << endl;
+        //temp.printNode();
+        //cout << "top of queue h(n): " << temp.gethN() << endl;
         if (temp.checkFinal()) {
+
+            cout << "GOAL :D" << endl;
+            cout << endl << "To solve this puzzle, the maximum number of nodes expanded (including the initial node/state) is " << totalNodesExpanded << "!!!" << endl;
+            cout << "The maximum number of nodes in the queue at any one time: " << longestFrontier << "!" << endl;
+            cout << "The depth of the goal node was " << temp.getgN() << "." << endl;
+            
             return temp;
         }
         else {
+            cout << "The best node to expand has g(n) = " << temp.getgN() << " and h(n) = " << temp.gethN() << "." << endl;
+            temp.printNode();
+            cout << "Expanding node #" << totalNodesExpanded << "..." << endl << endl;
             frontier.pop();
             explored.push_back(temp);
-            expand(algorithm, temp, frontier, explored);
+            expand(algorithm, temp, frontier, explored); 
+
+            if (frontier.size() > longestFrontier){
+                longestFrontier = frontier.size();
+            }
         }
     }
     return initialNode; //ERROR - SHOULD NOT REACH  
@@ -39,7 +60,7 @@ void expand(int algorithm, Node parent, priority_queue<Node> &frontier, vector<N
             }
         }
         if (!upPresent) {
-            up.updateState();
+            up.updateState(algorithm);
             frontier.push(up);
         }
     }
@@ -50,7 +71,7 @@ void expand(int algorithm, Node parent, priority_queue<Node> &frontier, vector<N
             }
         }
         if (!downPresent) {
-            down.updateState();
+            down.updateState(algorithm);
             frontier.push(down);
         }
     }
@@ -61,7 +82,7 @@ void expand(int algorithm, Node parent, priority_queue<Node> &frontier, vector<N
             }
         }
         if (!leftPresent) {
-            left.updateState();
+            left.updateState(algorithm);
             frontier.push(left);
         }
     }
@@ -72,7 +93,7 @@ void expand(int algorithm, Node parent, priority_queue<Node> &frontier, vector<N
             }
         }
         if (!rightPresent) {
-            right.updateState();
+            right.updateState(algorithm);
             frontier.push(right);
         }
     }

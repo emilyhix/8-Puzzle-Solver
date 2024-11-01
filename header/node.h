@@ -15,9 +15,9 @@ class Node{
                              7, 8, 0};
 
         int current_state[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-        int hN;
-        int gN;
-        int fN;
+        double hN;
+        double gN;
+        double fN;
         int goal_matrix[3][3] = {1 ,2 ,3,
                                   4, 5, 6,
                                   7, 8, 0};
@@ -27,18 +27,19 @@ class Node{
         Node(int, int setInitial[9]); //create parent
         Node(int, Operations, Node); //create children
         bool operator<(const Node &) const;
+        bool operator>(const Node &) const;
         bool operator== (const Node &);
         Node& operator=(const Node &);
-        void updateState();
+        void updateState(int);
         bool Valid();
         int getInitial(int);
         int getgN();
-        int gethN();
+        double gethN();
         int getGoalMatrix(int, int);
         void printNode();
         bool checkFinal();
         int AStarMTHeuristic(int board[9]);
-        int AStarEDHeuristic(int board[9]);
+        double AStarEDHeuristic(int board[9]);
 };
 
 #endif
