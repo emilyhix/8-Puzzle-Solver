@@ -21,22 +21,22 @@ class Node{
         Operations operation;
 
     public:
-        Node(int, int setInitial[9]); //create parent
+        Node(int, int setInitial[9]); //create initial node
         Node(int, Operations, Node); //create children
-        bool operator<(const Node &) const;
+        bool operator<(const Node &) const; //overloading operators for prio queue
         bool operator>(const Node &) const;
         bool operator== (const Node &);
         Node& operator=(const Node &);
-        void updateState(int);
-        bool Valid();
-        int getInitial(int);
-        int getgN();
-        double gethN();
-        int getGoalMatrix(int, int);
-        void printNode();
-        bool checkFinal();
-        int AStarMTHeuristic(int board[9]);
-        double AStarEDHeuristic(int board[9]);
+        void updateState(int); //updates the locations of the #s on the board and the h(n) value
+        bool Valid(); //checks location of 0 and determines which moves are valid
+        int getInitial(int); //returns inital board
+        int getgN(); //returns g(n)/depth/cost per move
+        double gethN(); //returns h(n)
+        int getGoalMatrix(int, int); //returns the goal state in matrix form
+        void printNode(); //prints specified node to terminal
+        bool checkFinal(); //checks if current node == goal node
+        int AStarMTHeuristic(int board[9]); //calculates h(n) for A* misplaced tile
+        double AStarEDHeuristic(int board[9]); //calculates h(n) for A* euclidean distance
 };
 
 #endif

@@ -49,25 +49,41 @@ Node::Node(int algorithm, Operations inputOp, Node parent) { // children node co
     }
 }
 
-bool Node::Valid() {
-    
-    if (operation == UP) {
-        if (current_state[0] == 0 || current_state[1] == 0 || current_state[2] == 0)
-            return false;
+bool Node::operator<(const Node & N) const {
+    return ((gN + hN) > (N.gN + N.hN));
+}
+
+bool Node::operator>(const Node & N) const {
+    return ((gN + hN) < (N.gN + N.hN));
+}
+
+bool Node::operator== (const Node &N) {
+    bool result = true;
+
+    for (int i = 0; i < 9; i++) {
+        if (current_state[i] != N.current_state[i]) {
+            result = false;
+        }
     }
-    else if (operation == DOWN) {
-        if (current_state[6] == 0 || current_state[7] == 0 || current_state[8] == 0)
-            return false;
+    if (gN != N.gN) {
+        result = false;
     }
-    else if (operation == LEFT) {
-        if (current_state[0] == 0 || current_state[3] == 0 || current_state[6] == 0)
-            return false;
+    if (hN != N.hN) {
+        result = false;
     }
-    else if (operation == RIGHT) {
-        if (current_state[2] == 0 || current_state[5] == 0 || current_state[8] == 0)
-            return false;
+    return result;
+}
+
+Node& Node::operator=(const Node & N) {
+    for (int i = 0; i < 9; ++i) {
+        initial_state[i] = N.initial_state[i];
+        current_state[i] = N.current_state[i];
+        goal_state[i] = N.goal_state[i];
     }
-    return true;
+    hN = N.hN;
+    gN = N.gN;
+    operation = N.operation;
+    return *this;
 }
 
 void Node::updateState(int algorithm) {
@@ -115,42 +131,43 @@ void Node::updateState(int algorithm) {
 
 }
 
-bool Node::operator<(const Node & N) const {
-    return ((gN + hN) > (N.gN + N.hN));
+bool Node::Valid() {
+    
+    if (operation == UP) {
+        if (current_state[0] == 0 || current_state[1] == 0 || current_state[2] == 0)
+            return false;
+    }
+    else if (operation == DOWN) {
+        if (current_state[6] == 0 || current_state[7] == 0 || current_state[8] == 0)
+            return false;
+    }
+    else if (operation == LEFT) {
+        if (current_state[0] == 0 || current_state[3] == 0 || current_state[6] == 0)
+            return false;
+    }
+    else if (operation == RIGHT) {
+        if (current_state[2] == 0 || current_state[5] == 0 || current_state[8] == 0)
+            return false;
+    }
+    return true;
 }
 
-bool Node::operator>(const Node & N) const {
-    return ((gN + hN) < (N.gN + N.hN));
+int Node::getInitial (int index) {
+    return initial_state[index];
 }
 
-bool Node::operator== (const Node &N) {
-    bool result = true;
-
-    for (int i = 0; i < 9; i++) {
-        if (current_state[i] != N.current_state[i]) {
-            result = false;
-        }
-    }
-    if (gN != N.gN) {
-        result = false;
-    }
-    if (hN != N.hN) {
-        result = false;
-    }
-    return result;
+int Node::getgN() {
+    return gN;
 }
 
-Node& Node::operator=(const Node & N) {
-    for (int i = 0; i < 9; ++i) {
-        initial_state[i] = N.initial_state[i];
-        current_state[i] = N.current_state[i];
-        goal_state[i] = N.goal_state[i];
-    }
-    hN = N.hN;
-    gN = N.gN;
-    operation = N.operation;
-    return *this;
+double Node::gethN() {
+    return hN;
 }
+
+int Node::getGoalMatrix(int i, int j){
+    return goal_matrix[i][j];
+}
+
 
 void Node::printNode() {
     int count3 = 0;
@@ -175,22 +192,6 @@ bool Node::checkFinal() {
         }
     }
     return temp;
-}
-
-int Node::getInitial (int index) {
-    return initial_state[index];
-}
-
-int Node::getgN() {
-    return gN;
-}
-
-double Node::gethN() {
-    return hN;
-}
-
-int Node::getGoalMatrix(int i, int j){
-    return goal_matrix[i][j];
 }
 
 int Node::AStarMTHeuristic(int board[9]){
