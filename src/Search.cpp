@@ -14,13 +14,12 @@ Node Search(int algorithm, Node initialNode) {
     while (!frontier.empty()) {
         Node temp = frontier.top();
         totalNodesExpanded++;
-        //cout << "top of frontier:" << endl;
-        //temp.printNode();
-        //cout << "top of queue h(n): " << temp.gethN() << endl;
+
         if (temp.checkFinal()) {
 
             cout << "GOAL :D" << endl;
-            cout << endl << "To solve this puzzle, the maximum number of nodes expanded (including the initial node/state) is " << totalNodesExpanded << "!!!" << endl;
+            cout << endl << "To solve this puzzle, the maximum number of nodes expanded (including the initial node/state) is ";
+            cout << totalNodesExpanded << "!!!" << endl;
             cout << "The maximum number of nodes in the queue at any one time: " << longestFrontier << "!" << endl;
             cout << "The depth of the goal node was " << temp.getgN() << "." << endl;
             
