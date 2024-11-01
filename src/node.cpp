@@ -13,8 +13,6 @@ Node::Node(int algorithm, int initialArray[9]) { // initial node constructor
     if (algorithm == 3) { //A* Euclidean
         hN = AStarEDHeuristic(initialArray);
     }
-
-    this->fN = this->gN + this->hN;
     
     // set initial
     for (int i = 0; i < 9; ++i) {

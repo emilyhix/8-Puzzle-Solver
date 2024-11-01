@@ -9,15 +9,12 @@ enum Operations {UP, DOWN, LEFT, RIGHT};
 class Node{
     private:
         int initial_state[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-        
         int goal_state[9] = {1, 2, 3,
                              4, 5, 6,
                              7, 8, 0};
-
         int current_state[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
         double hN;
         double gN;
-        double fN;
         int goal_matrix[3][3] = {1 ,2 ,3,
                                   4, 5, 6,
                                   7, 8, 0};
