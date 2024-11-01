@@ -18,6 +18,9 @@ class Node{
         int hN;
         int gN;
         int fN;
+        int goal_matrix[3][3] = {1 ,2 ,3,
+                                  4, 5, 6,
+                                  7, 8, 0};
         Operations operation;
 
     public:
@@ -31,8 +34,11 @@ class Node{
         int getInitial(int);
         int getgN();
         int gethN();
+        int getGoalMatrix(int, int);
         void printNode();
         bool checkFinal();
+        int AStarMTHeuristic(int board[9]);
+        int AStarEDHeuristic(int board[9]);
 };
 
 #endif
