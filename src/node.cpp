@@ -5,13 +5,13 @@ Node::Node(int algorithm, int initialArray[9]) { // initial node constructor
     
     // determine h(N)
     if (algorithm == 1) { //UniformCostSearch
-        this->hN = 0;
+        hN = 0;
     }
     if (algorithm == 2) { //A* Misplaced Tile
-        AStarMTHeuristic(initialArray);
+        hN = AStarMTHeuristic(initialArray);
     }
     if (algorithm == 3) { //A* Euclidean
-        //hN = something
+        hN = AStarEDHeuristic(initialArray);
     }
 
     this->fN = this->gN + this->hN;
@@ -28,7 +28,7 @@ Node::Node(int algorithm, int initialArray[9]) { // initial node constructor
 Node::Node(int algorithm, Operations inputOp, Node parent) { // children node constructor
         
     //set gN
-    this->gN = parent.getgN() + 1;
+    gN = parent.getgN() + 1;
 
     // set operation
     operation = inputOp;
@@ -39,11 +39,9 @@ Node::Node(int algorithm, Operations inputOp, Node parent) { // children node co
         hN = 0;
     }
     if (algorithm == 2) { //A* Misplaced Tile
-        updateState();
         hN = AStarMTHeuristic(current_state);
     }
     if (algorithm == 3) { //A* Euclidean
-        updateState();
         hN = AStarEDHeuristic(current_state);
     }
 
@@ -185,11 +183,22 @@ int Node::getGoalMatrix(int i, int j){
 int Node::AStarMTHeuristic(int board[9]){
     int hN = 0;
 
-    for(int i = 0; i < 9; i++){
-            if(current_state[i] == (i + 1)){
-                hN += 1;
+    int matrix[3][3] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int count = 0;
+
+    for(int i = 0; i < 3; i++){ // populate matrix
+        for(int j = 0; j < 3; j++){
+            matrix[i][j] = board[count];
+            count++;
+        }
+    }
+    for(int i = 0; i < 3; i++){ // compare matrix at point i,j to final solution i,j
+        for(int j = 0; j < 3; j++){
+            if(matrix[i][j] != getGoalMatrix(i, j)) {
+                ++hN;
             }
         }
+    }
 
     return hN;
 }
