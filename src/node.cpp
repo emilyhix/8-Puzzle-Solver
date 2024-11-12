@@ -65,12 +65,6 @@ bool Node::operator== (const Node &N) {
             result = false;
         }
     }
-    if (gN != N.gN) {
-        result = false;
-    }
-    if (hN != N.hN) {
-        result = false;
-    }
     return result;
 }
 

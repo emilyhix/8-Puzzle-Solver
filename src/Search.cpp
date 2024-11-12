@@ -31,6 +31,9 @@ Node Search(int algorithm, Node initialNode) {
             cout << "Expanding node #" << totalNodesExpanded << "..." << endl << endl;
             frontier.pop();
             explored.push_back(temp);
+
+            //cout << "ex size: " << explored.size() << endl;
+
             expand(algorithm, temp, frontier, explored); 
 
             if (frontier.size() > longestFrontier){
@@ -54,7 +57,9 @@ void expand(int algorithm, Node parent, priority_queue<Node> &frontier, vector<N
 
     if (up.Valid()) {
         for (int i = 0; i < explored.size(); i++) {
-            if (up == explored[i]) {
+            Node temp = up;
+            temp.updateState(algorithm);
+            if (temp == explored[i]) {
                 upPresent = true;
             }
         }
@@ -65,7 +70,9 @@ void expand(int algorithm, Node parent, priority_queue<Node> &frontier, vector<N
     }
     if (down.Valid()) {
         for (int i = 0; i < explored.size(); i++) {
-            if (down == explored[i]) {
+            Node temp = down;
+            temp.updateState(algorithm);
+            if (temp == explored[i]) {
                 downPresent = true;
             }
         }
@@ -76,7 +83,9 @@ void expand(int algorithm, Node parent, priority_queue<Node> &frontier, vector<N
     }
     if (left.Valid()) {
         for (int i = 0; i < explored.size(); i++) {
-            if (left == explored[i]) {
+            Node temp = left;
+            temp.updateState(algorithm);
+            if (temp == explored[i]) {
                 leftPresent = true;
             }
         }
@@ -87,7 +96,9 @@ void expand(int algorithm, Node parent, priority_queue<Node> &frontier, vector<N
     }
     if (right.Valid()) {
         for (int i = 0; i < explored.size(); i++) {
-            if (right == explored[i]) {
+            Node temp = right;
+            temp.updateState(algorithm);
+            if (temp == explored[i]) {
                 rightPresent = true;
             }
         }
