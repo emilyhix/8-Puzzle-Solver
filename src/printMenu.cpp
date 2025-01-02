@@ -6,7 +6,7 @@ void printMenu() {
     int initialTile[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     int input;
 
-    cout << "Welcome to ehix001-sphim001 8 puzzle solver." << endl;
+    cout << "Welcome to the Hix-Phimmala 8 puzzle solver." << endl;
     cout << "Type \"1\" to use a default puzzle, or \"2\" to enter your own puzzle." << endl;
     cin >> puzzleChoice;
 
