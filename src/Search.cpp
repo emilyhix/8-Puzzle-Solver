@@ -17,9 +17,9 @@ Node Search(int algorithm, Node initialNode) {
 
         if (temp.checkFinal()) {
 
-            cout << "GOAL :D" << endl;
+            cout << "Goal has been reached." << endl;
             cout << endl << "To solve this puzzle, the maximum number of nodes expanded (including the initial node/state) is ";
-            cout << totalNodesExpanded << "!!!" << endl;
+            cout << totalNodesExpanded << "!" << endl;
             cout << "The maximum number of nodes in the queue at any one time: " << longestFrontier << "!" << endl;
             cout << "The depth of the goal node was " << temp.getgN() << "." << endl;
             
