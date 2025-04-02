@@ -1,5 +1,5 @@
 # 8 Puzzle Solver
-Authors: [Emily Hix](https://github.com/emilyhix) and [Sabaipon Phimmala](https://github.com/bphimmala)
+> Authors: [Emily Hix](https://github.com/emilyhix) and [Sabaipon Phimmala](https://github.com/bphimmala)
 
 8 puzzle solver utilizing the A* search algorithm and various heuristics. The implementation is intentionally modular and features an object-oriented design.
 
